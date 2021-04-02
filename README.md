@@ -4,12 +4,12 @@ Bluetooth app coding challenge project
 
 **Android Screenshots**
 
-<img src="https://github.com/RegisSaffi/bluetooth-app/blob/master/assets/screenshots/android.png" height="500" alt="Android screenshot">
+<img src="https://github.com/RegisSaffi/bluetooth-app/blob/master/assets/android.png" height="500" alt="Android screenshot">
 
 **iOS Screenshots**
 
 
-<img src="https://github.com/RegisSaffi/bluetooth-app/blob/master/assets/screenshots/ios.png" height="500" alt="iOS screenshot">
+<img src="https://github.com/RegisSaffi/bluetooth-app/blob/master/assets/ios.png" height="500" alt="iOS screenshot">
 
 ## How to run this project
 
