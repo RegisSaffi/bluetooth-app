@@ -169,7 +169,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: _getMessage("Error: ${snapshot.error}"));
                       } else if (snapshot.connectionState ==
                           ConnectionState.waiting) {
-                        return CircularProgressIndicator.adaptive();
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height:20,width: 20,child: CircularProgressIndicator.adaptive()),
+                            SizedBox(height: 10,),
+                            Text(
+                                "Searching for devices...",
+                                textAlign: TextAlign.center,
+                                style:
+                                TextStyle(color: Colors.grey, fontSize: 17)),
+                          ],
+                        );
                       } else if (snapshot.hasData) {
                         if (snapshot.data.length == 0) {
                           return Center(
