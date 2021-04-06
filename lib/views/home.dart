@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, i) {
                             return ListTile(
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>DeviceDetails(device: snapshot.data[i].device,data: snapshot.data[i].advertisementData,)));
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>DeviceDetails(device: snapshot.data[i].device,data: snapshot.data[i].advertisementData,)));
                               },
                               leading: CircleAvatar(
                                 child: Text(
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   size: 20,
                                 ),
                               ),
-                              title: Text("${snapshot.data[i].device.name==""?"Un named device":snapshot.data[i].device.name}"),
+                              title: Text("${snapshot.data[i].device.name==""?"Unnamed device":snapshot.data[i].device.name}"),
                               subtitle: Text(
                                   "${snapshot.data[i].advertisementData
                                       .connectable
