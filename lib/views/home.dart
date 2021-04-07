@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bluetooth_app/views/device_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,19 +13,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   FlutterBlue flutterBlue = FlutterBlue.instance;
   bool supported = false;
+
   @override
   void initState() {
-    scanDevices();
+    checkAvailability();
     super.initState();
   }
 
   scanDevices() async {
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.startScan(timeout: Duration(minutes: 30,),scanMode: ScanMode.balanced,);
+  }
+
+  checkAvailability() async {
     var av = await flutterBlue.isAvailable;
     setState(() {
       supported = av;
     });
 
+    if(av)
+    scanDevices();
   }
 
   @override
@@ -125,8 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, snapshot) {
                           return snapshot.data
                               ? Container(
-                                  height: 20,
-                                  width: 20,
+                                  height: 15,
+                                  width: 15,
                                   margin: EdgeInsets.only(right: 15),
                                   child: CircularProgressIndicator.adaptive())
                               : IconButton(
@@ -151,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context, snapshot)
             {
               if (snapshot.data == BluetoothState.off) {
+                flutterBlue.stopScan();
                 return _getMessage(
                     "Turn on your bluetooth for the application to function.");
               } else if (snapshot.data == BluetoothState.unavailable) {
@@ -214,10 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               title: Text("${snapshot.data[i].device.name==""?"Unnamed device":snapshot.data[i].device.name}"),
                               subtitle: Text(
-                                  "${snapshot.data[i].advertisementData
-                                      .connectable
-                                      ? "Ready"
-                                      : "Not connectable"}"),
+                                  "RSSI: ${snapshot.data[i].rssi}"),
                             );
                           },
                           itemCount: snapshot.data.length,
